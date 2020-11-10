@@ -1,18 +1,19 @@
 pkgbase = check_mk-agent
 	pkgdesc = Agent to send information to a Check_MK server
-	pkgver = 1.5.0p16
+	pkgver = 1.6.0
 	pkgrel = 3
 	url = https://mathias-kettner.de
 	install = check_mk-agent.install
 	arch = any
 	license = GPLv2
-	depends = xinetd
-	source = check_mk_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v1.5.0p16/agents/check_mk_agent.linux
-	source = check_mk_caching_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v1.5.0p16/agents/check_mk_caching_agent.linux
-	source = xinetd.conf::https://raw.githubusercontent.com/tribe29/checkmk/v1.5.0p16/agents/cfg_examples/xinetd.conf
-	sha512sums = 978050b2ec6b15e0389911178eb9d8eed459fb043299043ac89b7463d3f6a7cbd3de8b9d3dd21883e5c3002c1e0ca9c486ff9b9faecb9c6f024812373b0ce3fa
-	sha512sums = cd1e9c1de50e523fc602249b052fa90470e41665bf61a87117b02733eea6d5b4c7dc1c1c8500f5d2a56a4707ac2ffd8a9d147a35b67c877436b221d88aa8b16a
-	sha512sums = 2a27edb4f16e2cc6e6c3523675f0f98c3bd6ff842478dbeeb0a6f6d48c0b2632bdba9ddf0215928ab6fa15c1c03d2ae5ccfef4f28b43b9cd2915e8ea47855667
+	source = check_mk_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v1.6.0/agents/check_mk_agent.linux
+	source = check_mk_caching_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v1.6.0/agents/check_mk_caching_agent.linux
+	source = systemd.conf::https://raw.githubusercontent.com/tribe29/checkmk/v1.6.0/agents/cfg_examples/systemd/check_mk%40.service
+	source = systemd.socket::https://github.com/tribe29/checkmk/blob/v1.6.0/agents/cfg_examples/systemd/check_mk.socket
+	sha512sums = ad0936f9b5f9ad013ade338666bbf2b1f8816047028833389b663c81a23818c5bbfaba395b736d3f897746cac18cb8e53f0b397320b8dbadcaf0f9f44b998d42,
+	sha512sums = a165bc7a7a1be4941f25b476b9a433c8b67994afc7689271f26fb21a2a2b89e95609086d3d80da017527b470c7b0bf948a6dbd97a764e4875603a7ceb905e02e,
+	sha512sums = c0efaf2166633997b13cb8645538636a13ee98923d5b3bd12aa4d5f03301a6775c494f7be302248e8d4b491b5c7e835c99514f241dda50bdde65478565ad98ae,
+	sha512sums = 1bfd04e8e999a0a5abca36d385430006f3579cce2de9eeca265e026219fc985a67a445f6ab2b3b57b843bd20a0169f33322537527d1e0fa64cfd80f3273622d3
 
 pkgname = check_mk-agent
 
