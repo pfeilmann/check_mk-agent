@@ -3,6 +3,10 @@ post_install() {
     systemctl enable --now check_mk-agent.socket    
 }
 post_upgrade() {
+  # if a upgrade from xinetd restart xinitd
+  if [ $(vercmp $2 1.6.0-1) -lt 0 ]; then
+      systemctl restart xinetd.service
+  fi
+  systemctl daemon-reload
 	systemctl restart check_mk-agent.socket
 }
-
