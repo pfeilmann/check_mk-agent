@@ -2,33 +2,34 @@
 # Maintainer since 2018: Christian Blechert <christian@anysrc.net>
 
 pkgname=check_mk-agent
-pkgver=1.5.0p16
-pkgrel=3
+pkgver=1.6.0
+pkgrel=1
 pkgdesc="Agent to send information to a Check_MK server"
 arch=(any)
 url="https://mathias-kettner.de"
 license=('GPLv2')
 install=${pkgname}.install
-depends=('xinetd')
 
 source=("check_mk_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v${pkgver}/agents/check_mk_agent.linux"
         "check_mk_caching_agent.linux::https://raw.githubusercontent.com/tribe29/checkmk/v${pkgver}/agents/check_mk_caching_agent.linux"
-        "xinetd.conf::https://raw.githubusercontent.com/tribe29/checkmk/v${pkgver}/agents/cfg_examples/xinetd.conf")
+        "check_mk-agent.service::https://raw.githubusercontent.com/tribe29/checkmk/v${pkgver}/agents/cfg_examples/systemd/check_mk%40.service"
+        "check_mk-agent.socket::https://raw.githubusercontent.com/tribe29/checkmk/v${pkgver}/agents/cfg_examples/systemd/check_mk.socket")
 
-sha512sums=('978050b2ec6b15e0389911178eb9d8eed459fb043299043ac89b7463d3f6a7cbd3de8b9d3dd21883e5c3002c1e0ca9c486ff9b9faecb9c6f024812373b0ce3fa'
-            'cd1e9c1de50e523fc602249b052fa90470e41665bf61a87117b02733eea6d5b4c7dc1c1c8500f5d2a56a4707ac2ffd8a9d147a35b67c877436b221d88aa8b16a'
-            '2a27edb4f16e2cc6e6c3523675f0f98c3bd6ff842478dbeeb0a6f6d48c0b2632bdba9ddf0215928ab6fa15c1c03d2ae5ccfef4f28b43b9cd2915e8ea47855667')
+sha512sums=('dd74e65041f37c02af647abae55d1572c5fd27267b491082d67d3c4f00266e46da481c71822fa6b97f2a119116ff14e180e93c3d703fba0e3aeee335548494a7'
+            'a165bc7a7a1be4941f25b476b9a433c8b67994afc7689271f26fb21a2a2b89e95609086d3d80da017527b470c7b0bf948a6dbd97a764e4875603a7ceb905e02e'
+            '2ca8f5f621483da7a66c8e4651f85b80ec140406cfbc704559c40a115e4b059e1dda06f5b18fe06a1669274dbd0bcadced4876629e1385135a05eadc5dd3aa70'
+            '1bfd04e8e999a0a5abca36d385430006f3579cce2de9eeca265e026219fc985a67a445f6ab2b3b57b843bd20a0169f33322537527d1e0fa64cfd80f3273622d3')
 
 package() {
 	mkdir -p "$pkgdir/usr/bin/"
-	mkdir -p "$pkgdir/etc/xinetd.d/"
 	mkdir -p "$pkgdir/var/lib/check_mk_agent/cache"
 	mkdir -p "$pkgdir/var/lib/check_mk_agent/job"
 	mkdir -p "$pkgdir/var/lib/check_mk_agent/spool"
 	mkdir -p "$pkgdir/usr/lib/check_mk_agent/local"
 	mkdir -p "$pkgdir/usr/lib/check_mk_agent/plugins"
+	mkdir -p "$pkgdir/etc/systemd/system"
 	install -m744 "$srcdir/check_mk_agent.linux" "$pkgdir/usr/bin/check_mk_agent"
-	install -m644 "$srcdir/xinetd.conf" "$pkgdir/etc/xinetd.d/check_mk"
 	install -m744 "$srcdir/check_mk_caching_agent.linux" "$pkgdir/usr/bin/check_mk_caching_agent"
+	install -m644 "$srcdir/check_mk-agent.service" "$pkgdir/etc/systemd/system/check_mk-agent@.service"
+	install -m644 "$srcdir/check_mk-agent.socket" "$pkgdir/etc/systemd/system/check_mk-agent.socket"
 }
-

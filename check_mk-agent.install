@@ -1,7 +1,8 @@
 post_install() {
-	systemctl restart xinetd.service
+    systemctl daemon-reload
+    systemctl enable --now check_mk-agent.socket    
 }
 post_upgrade() {
-	systemctl restart xinetd.service
+	systemctl restart check_mk-agent.socket
 }
 
